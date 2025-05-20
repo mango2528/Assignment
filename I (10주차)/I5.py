@@ -1,3 +1,15 @@
+import string
+
+def is_punctuation_or_num(c : str) -> bool :
+    if c.isdigit() :
+        return True
+
+    for s in string.punctuation :
+        if (c == s) :
+            return True
+        
+    return False
+
 a = list()
 b = list()
 
@@ -10,7 +22,7 @@ while True :
     if (a == '') :
         break
     
-    a = ''.join(c if c.isalpha() else ' ' for c in a)
+    a = ''.join(c if not is_punctuation_or_num(c) else ' ' for c in a)
     a = a.split()
 
     for i in range(len(a)) :
