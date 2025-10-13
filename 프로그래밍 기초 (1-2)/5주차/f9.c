@@ -1,8 +1,9 @@
 #include <stdio.h>
 
 int main() {
-	int term;
-	double eq1, eq2;
+	int term = 0;
+	double eq1 = 0;
+	double eq2 = 0;
 	
 	scanf("%d", &term);
 	

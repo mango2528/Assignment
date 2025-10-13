@@ -1,31 +1,28 @@
 #include <stdio.h>
 
 int main() {
-	int initPrize;
-	int prize;
-	int interest;
-	int withdraw;
+	double principal;
+	double interest;
+	double withdraw;
 	int years = 0;
 	
-	scanf("%d %d %d", &prize, &interest, &withdraw);
-	initPrize = prize;
+	scanf("%lf %lf %lf", &principal, &interest, &withdraw);
+	double initPrincipal = principal;
 	
-	// printf("%d\n", (int)(prize * (1 + ((double)interest / 100))));
+	// printf("%d\n", (int)(principal * (1 + ((double)interest / 100))));
 	
-	prize = (int)(prize * (1 + ((double)interest / 100)));
-	prize -= withdraw;
+	principal = principal * (1 + interest / 100.0) - withdraw;
 	years++;
 	
-	// printf("%d %d\n", prize, initPrize);
+	// printf("%d %d\n", principal, initPrincipal);
 	
-	if (prize >= initPrize) {
+	if (principal >= initPrincipal) {
 		printf("NO");
 		return 0;
 	}
 	
-	while (prize > 0) {
-		prize = (int)(prize * (1 + ((double)interest / 100)));
-		prize -= withdraw;
+	while (principal > 0) {
+		principal = principal * (1 + interest / 100.0) - withdraw;
 		years++;
 	}
 	
