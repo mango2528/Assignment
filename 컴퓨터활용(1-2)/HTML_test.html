@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <style>
+    </style>
         <title>
             안녕문서
         </title>
         <link rel="stylesheet" href="CSS_test.css"
+
     </head>
+
     <body>
+
+    <div>
         <p class="center">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem dolore commodi assumenda accusantium, aspernatur debitis aperiam architecto vel ea facilis autem? Similique praesentium modi labore ratione possimus ab, nemo consequuntur!
         </p>
-    <a id="welsh"><img src="media/corgi.jpg" width="300" height="150" alt="NO"></a>
-        <h1>웰시코기를 숭배하라!</h1>
-    <img src="media/worship.jpg" width="300" height="150" alt="NO">
+    </div>
+
+    <div class="image">
+    <div class="welsh"><img src="media/corgi.jpg" width="300" height="150" alt="NO" onclick="move()"></div>
+    <h1>웰시코기를 숭배하라!</h1>
+    <div class="welsh"><img src="media/worship.jpg" width="300" height="150" alt="NO" onclick="move()"></div>
+    </div>
+
+    <script>
+      function move() {
+        document.querySelector(".welsh").classList.add("anim");
+      }
+    </script>
+
         <h3>숭배해야하는 이유:</h3>
         <ol type="1">
             <li>귀엽기 때문이다.</li>

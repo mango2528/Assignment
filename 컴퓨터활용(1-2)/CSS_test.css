@@ -9,3 +9,37 @@ p {
 .center {
     text-align: center;
 }
+
+.image {
+    background-color: #eee;
+    border-radius: 20px;
+    margin-bottom: 50;
+    padding: 50px;
+    width: 500px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+/* .welsh {
+    animation: rotate_image 10s linear infinite;
+    transform-origin: 50% 50%;
+} */
+
+@keyframes rotate_image{
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.welsh {
+    cursor: pointer;
+}
+
+.anim {
+  transform: rotate(360deg) scale(1);
+  transition-property: all;
+  transition-duration: 3s;  
+}
