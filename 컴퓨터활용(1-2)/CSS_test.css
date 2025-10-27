@@ -2,6 +2,10 @@ p {
     font-size: ２8px;
 }
 
+.body {
+    text-align: center;
+}
+
 .red {
     color: red;
 }
@@ -19,6 +23,7 @@ p {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
 
 
 }
