@@ -1,7 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <script src="JS_test.js">
+    </script>
     <style>
+        @keyframes woosh {
+            from { font-size: 200%;}
+            to {font-size: 180%;}
+        }
+
+        body {
+            background-image: url('media/mountain.jpg'); /* Replace with your image path */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-size:cover; /* Scales the image to cover the entire background */
+            background-attachment:scroll; /* Keeps the background image fixed while scrolling */
+        }
+
+        h1 {
+            display: inline-block;
+            padding: 5px;
+            animation-duration: 3s;
+            animation-timing-function:ease-in-out;
+            color: black;
+            background-color: wheat;
+            animation-name: woosh;
+            animation-name: rotate;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
     </style>
         <title>
             안녕문서
@@ -19,16 +45,14 @@
     </div>
 
     <div class="image">
-    <div class="welsh"><img src="media/corgi.jpg" width="300" height="150" alt="NO" onclick="move()"></div>
+    <div class="welsh"><img src="media/corgi.jpg" width="300" height="150" alt="NO" onclick="move()"
+        onmouseover="onMouseEnter(this, 'media/corgi2.jpg')"
+        onmouseout="onMouseExit(this, 'media/corgi.jpg')"></div>
     <h1>웰시코기를 숭배하라!</h1>
-    <div class="welsh"><img src="media/worship.jpg" width="300" height="150" alt="NO" onclick="move()"></div>
+    <img src="media/worship.jpg" width="300" height="150" alt="NO"
+        onmouseover="onMouseEnter(this, 'media/worship2.jpg')"
+        onmouseout="onMouseExit(this, 'media/worship.jpg')">
     </div>
-
-    <script>
-      function move() {
-        document.querySelector(".welsh").classList.add("anim");
-      }
-    </script>
 
     <div class="image">
         <h3>숭배해야하는 이유:</h3>
@@ -58,8 +82,8 @@
         </table>
     </div>
 
-
-        <a href="#welsh">다시 귀여운 웰시코기 보러 가기</a><br>
+    <div class="image">
+        <a href="#top">다시 귀여운 웰시코기 보러 가기</a><br>
         <a href="https://www.google.com/search?sca_esv=d0de567ea38b85be&sxsrf=AE3TifMnUT394sKBlrMucpMbQ0o_64EDzQ:1758521878561&udm=2&fbs=AIIjpHyDg0Pef0CibV20xjIa-FRejxCuOmkq074km2sZXr7uqz9_8tiStZcoMiP-q5iAtTZea012_WShjO6gd8_YyX878vIUOOVaRtH7vIltuz604IVIGI7VytTfxeVPAcHk8vlHdJ_NoWdAzbcf9-nohuRvoKYGePYNttX7e2AJH0xCoKa55j2cbYVB7rYUiVhQ25Wqe6PyC7q8i42CmNwd8_kz2Zd-wlXz3bsaERYhLLKct8Jr1Ko&q=welsh+corgi&sa=X&sqi=2&ved=2ahUKEwiY55q_3OuPAxWqzjQHHcHjItwQtKgLegQIFhAB&biw=1920&bih=945&dpr=1">짱 귀여운 웰시코기들 보러 가기</a><br>
         <a href="media/corgi.jpg" download="super_duper_cute_corgi.jpg">귀여운 웰시코기 사진 다운로드!</a><br>
 
@@ -68,12 +92,15 @@
         <h3>웰시코기 3:1</h3>
         <input type="button" value="경건해지기" onclick="alert('포메라니안이 그의 장인 보더콜리의 양 떼를 치더니 그 떼를 광야 서쪽으로 인도하여 웰시코기님의 산 스노우든에 이르매')">
 
-        <h3>산책가기</h3>
+        <h3>산책 장소</h3>
         <select name="places" id="places-select">
             <option value="mountain" selected>산</option>
             <option value="coast">바다</option>
             <option value="road">길</option>
             <option value="park">공원</option>
         </select>
+
+        <input type="button" value="산책가기!" onclick="showValue()">
+    </div>
     </body>
 </html>
