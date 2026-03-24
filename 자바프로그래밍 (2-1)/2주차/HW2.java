@@ -1,17 +1,33 @@
-import java.util.Scanner;
-
 public class HW2 {
-	public static void main(String[] args) {		
-		int a = Integer.parseInt(args[0]), b = Integer.parseInt(args[2]), result = 0;
-		float resultFloat = 0;
-		char op = args[1].charAt(0);
-		
+	public static void main(String[] args) {				
 		if (args.length != 3) {
-			System.out.printf("%d %c %d = 수식 오류", Integer.parseInt(args[0]), args[1].charAt(0), Integer.parseInt(args[2]));
+			switch (args.length) {
+			case 1 :
+				System.out.printf("%s = 수식 오류", args[0]);
+				System.exit(0);
+				
+			case 2 :
+				if (Character.isDigit(args[0].charAt(0)) && Character.isDigit(args[1].charAt(0))) {
+					System.out.printf("%s%s = 연산자 없음", args[0], args[1]);
+					System.exit(0);
+				}
+				else if (Character.isDigit(args[0].charAt(0)) && !Character.isDigit(args[1].charAt(0))) {
+					System.out.printf("%s%s = 피연산자 없음", args[0], args[1]);
+					System.exit(0);
+				}
+				else if (!Character.isDigit(args[0].charAt(0)) && Character.isDigit(args[1].charAt(0))) {
+					System.out.printf("%s%s = 피연산자 없음", args[0], args[1]);
+					System.exit(0);
+				}
+			}
+			
+			System.out.printf("%d%c%d = 수식 오류", Integer.parseInt(args[0]), args[1].charAt(0), Integer.parseInt(args[2]));
 			System.exit(0);
 		}
 		
-		a = Integer.parseInt(args[0])
+		int a = Integer.parseInt(args[0]), b = Integer.parseInt(args[2]), result = 0;
+		float resultFloat = 0;
+		char op = args[1].charAt(0);
 		
 		switch (op) {
 		case '+' :
@@ -36,14 +52,14 @@ public class HW2 {
 			
 		case '%' :
 			if (b == 0) {
-				System.out.printf("%d %c %d = 분모가 0인 오류", Integer.parseInt(args[0]), args[1].charAt(0), Integer.parseInt(args[2]));
+				System.out.printf("%d%c%d = 분모가 0인 오류", Integer.parseInt(args[0]), args[1].charAt(0), Integer.parseInt(args[2]));
 				System.exit(0);
 			}
 			
 			result = a % b;
 			break;
 		default :
-			System.out.printf("%d %c %d = 연산자 오류", Integer.parseInt(args[0]), args[1].charAt(0), Integer.parseInt(args[2]));
+			System.out.printf("%d%c%d = 연산자 오류", Integer.parseInt(args[0]), args[1].charAt(0), Integer.parseInt(args[2]));
 			System.exit(0);
 		}
 		
