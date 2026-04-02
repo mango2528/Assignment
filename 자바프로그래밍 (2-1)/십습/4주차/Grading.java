@@ -1,62 +1,95 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Grading {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		String	fName = "3_1000", ext_name=".txt", ext_out=".out";
-		String	number, name;
-		int 	kor, eng, math, ksum, esum, msum, cnt;
+		final int SIZE = 2000;
+		
+		String	fName = "2_100", ext_name=".txt";
 		File	in_f = new File(fName+ext_name);
-		File	out_f = new File(fName+ext_out);
+		
+		String[] number = new String[SIZE];
+		String[] name = new String[SIZE];
+		int[] kor = new int[SIZE]; 
+		int[] eng = new int[SIZE];
+		int[] math = new int[SIZE];
+		float[] average = new float[SIZE];
+		
+		int korSum = 0;
+		int engSum = 0;
+		int mathSum = 0;
+		float averageSum = 0;
+		int count = 0;
+		
 		if(!in_f.exists()) {
 			System.out.println(fName+ext_name+" does not exist..");
 			System.exit(0);
 		}
-		ksum = esum = msum = cnt = 0;
-		PrintWriter	oFile = new PrintWriter(out_f);
+		
 		Scanner	in = new Scanner(in_f), line;
+		
 		while (in.hasNextLine()) {
-			float average;
-			
 			line = new Scanner(in.nextLine());
-			number = line.next(); name = line.next();
-			kor = line.nextInt(); eng = line.nextInt(); math = line.nextInt();
-			ksum += kor; esum += eng; msum += math;
-			cnt++;
-			System.out.printf("%s(%s) %5d %5d %5d %7.2f\n", name, number, kor, eng, math, (kor+eng+math)/3.0f), getPoint((int)average);
-			// oFile.printf("%s(%s) %5d %5d %5d %7.2f\n", name, number, kor, eng, math, average = (kor+eng+math)/3.0f);
+			
+			number[count] = line.next();
+			name[count] = line.next();
+			kor[count] = line.nextInt();
+			eng[count] = line.nextInt();
+			math[count] = line.nextInt();
+			average[count] = (kor[count] + eng[count] + math[count]) / 3;
+			
+			korSum += kor[count];
+			engSum += eng[count];
+			mathSum += math[count];
+			averageSum += average[count];
+			
+			System.out.printf("%s(%s) %5d %5d %5d %7.2f\n", name[count], number[count], kor[count], eng[count], math[count], (kor[count] + eng[count] + math[count]) / 3.0f);
+			
+			count++;
 		}
-		//System.out.printf("%22s%.2f %.2f %.2f\n"," ", (float)ksum/cnt, (float)esum/cnt, (float)msum/cnt);
-		// oFile.printf("%22s%.2f %.2f %.2f\n"," ", (float)ksum/cnt, (float)esum/cnt, (float)msum/cnt);
-		oFile.close();
+		
+		number = Arrays.copyOf(number, count); // 배열을 유효한 범위까지 자르기
+		name = Arrays.copyOf(name, count);
+		kor = Arrays.copyOf(kor, count);
+		eng = Arrays.copyOf(eng, count);
+		math = Arrays.copyOf(math, count);
+		average = Arrays.copyOf(average, count);
+
+		System.out.printf("%16s%.2f %.2f %.2f\n"," ", (float)korSum / count, (float)engSum / count, (float)mathSum / count);
 	}
 	
-	public static char getPoint(int average) {
-		char ch = 'F';
+	private static boolean maxLast(float[] averages, int sizes, String[] names, String[] numbers, int[] kors, int[] engs, int[] maths, boolean asc) {
+		for (int i = average.length; i > 1 && maxLast(average, i, name, number, ))
 		
-		switch (average / 10) {
-		case 10 :
+		return true;
+	}
+	
+	public static char getPoint(int avg) {
+		char	result = 'F';
+		
+		switch (avg/10) {
+		case 10:
+		case 9:
+			result = 'A';
 			break;
-		case 9 :
-			ch = 'A';
+		case 8:
+			result = 'B';
 			break;
-		case 8 :
-			ch = 'B';
+		case 7:
+			result = 'C';
 			break;
-		case 7 :
-			ch = 'C';
+		case 6:
+			result = 'D';
 			break;
-		case 6 :
-			ch = 'D';
-			break;
-		default :
+		default:
 			break;
 		}
 		
-		return ch;
+		return result;
 	}
 }
 
