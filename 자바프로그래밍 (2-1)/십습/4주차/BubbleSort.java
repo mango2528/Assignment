@@ -68,7 +68,9 @@ public class BubbleSort {
 		}
 	}
 	
-	public static boolean maxLast()
+	public static boolean maxLast() {
+		
+	}
 	
 	public static void swap(int[] n, int i, int j) {
 		int temp;
