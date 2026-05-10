@@ -9,7 +9,7 @@ public class HW1 {
 		Scanner scanner = new Scanner(file);
 		Scanner line;
 		
-		Student[] students = new Student[1];
+		StudentHW1[] students = new StudentHW1[1];
 		
 		int index = 0;
 		
@@ -20,29 +20,29 @@ public class HW1 {
 				students = Arrays.copyOf(students, students.length * 2);
 			}
 			
-			students[index] = new Student(line.nextInt(), line.next(), line.nextInt(), line.nextInt(), line.nextInt());
+			students[index] = new StudentHW1(line.nextInt(), line.next(), line.nextInt(), line.nextInt(), line.nextInt());
 			
 			index++;
 		}
 		
-		Student.setEvaluation(students);
+		StudentHW1.setEvaluation(students);
 		
 		try {
 			int no = Integer.parseInt(args[1]);
 			
-			Student.printSpecific(students, no);
+			StudentHW1.printSpecific(students, no);
 		}
 		catch (Exception e) {
 			String name = args[1];
 			
-			Student.printSpecific(students, name);
+			StudentHW1.printSpecific(students, name);
 		}
 		
 		scanner.close();
 	}
 }
 
-class Student {
+class StudentHW1 {
 	int no;
 	String name;
 	int kor;
@@ -51,7 +51,7 @@ class Student {
 	double average;
 	String eval;
 	
-	public Student(int no, String name, int kor, int eng, int mat) {
+	public StudentHW1(int no, String name, int kor, int eng, int mat) {
 		this.no = no;
 		this.name = name;
 		this.kor = kor;
@@ -64,7 +64,7 @@ class Student {
 		return String.format("%d %s %3d %3d %3d %.2f %s", no, name, kor, eng, mat, average, eval);
 	}
 	
-	public static void printStudents(Student[] arr) {
+	public static void printStudents(StudentHW1[] arr) {
 		System.out.println("학번     이름   국어 영어 수학 평균   평가");
 		
 		for (int i = 0; i < arr.length; i++) {
@@ -76,7 +76,7 @@ class Student {
 		}
 	}
 	
-	public static void printSpecific(Student[] arr, String name) {
+	public static void printSpecific(StudentHW1[] arr, String name) {
 		boolean flag = false;
 		
 		for (int i = 0; i < arr.length; i++) {
@@ -109,7 +109,7 @@ class Student {
 		System.out.printf("\n학생 전체 평균 : %.1f", getAverage(arr));
 	}
 	
-	public static void printSpecific(Student[] arr, int no) {
+	public static void printSpecific(StudentHW1[] arr, int no) {
 		boolean flag = false;
 		
 		for (int i = 0; i < arr.length; i++) {
@@ -146,7 +146,7 @@ class Student {
 		average = (double)(kor + eng + mat) / 3;
 	}
 	
-	public static void setEvaluation(Student[] arr) {
+	public static void setEvaluation(StudentHW1[] arr) {
 		double temp = getAverage(arr);
 		
 		for (int i = 0; i < arr.length; i++) {
@@ -163,7 +163,7 @@ class Student {
 		}
 	}
 	
-	private static double getAverage(Student[] arr) {
+	private static double getAverage(StudentHW1[] arr) {
 		double temp = 0;
 		int count = 0;
 		
