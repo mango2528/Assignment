@@ -6,7 +6,13 @@ import java.io.File;
 
 public class HW {
 	public static void main(String[] args) throws FileNotFoundException {
-		File file = new File("p_100.txt");
+		File file = new File(args[0]);
+		
+		if (!file.exists()) {
+			System.out.printf("파일 %s 없음\n", args[0]);
+			System.exit(-1);
+		}
+		
 		Scanner scanner = new Scanner(file);
 		scanner.useDelimiter("\\|");
 		Scanner line;
@@ -17,33 +23,33 @@ public class HW {
 		
 		while (scanner.hasNextLine()) {
 			line = new Scanner(scanner.nextLine());
+			line.useDelimiter("\\|");
 			
 			if (index >= person.length) {
 				person = Arrays.copyOf(person, person.length * 2);
 			}
 			
 			String type = line.next();
-			System.out.println(type);
 			
 			switch (type) {
 			case "학부" :
-				person[index] = new Under(type, line.next(), line.next(), line.next(), line.next());
+				person[index] = new Under(line.next(), line.next(), line.next(), line.next(), line.next());
 				break;
 				
 			case "석사" :
-				person[index] = new MS(type, line.next(), line.next(), line.next(), line.next());
+				person[index] = new MS(line.next(), line.next(), line.next(), line.next(), line.next());
 				break;
 				
 			case "박사" :
-				person[index] = new PhD(type, line.next(), line.next(), line.next(), line.next());
+				person[index] = new PhD(line.next(), line.next(), line.next(), line.next(), line.next());
 				break;
 				
 			case "조교" :
-				person[index] = new Assistant(type, line.next(), line.next(), line.next(), line.next());
+				person[index] = new Assistant(line.next(), line.next(), line.next(), line.next(), line.next());
 				break;
 				
 			case "교수" :
-				person[index] = new Professor(type, line.next(), line.next(), line.next(), line.next());
+				person[index] = new Professor(line.next(), line.next(), line.next(), line.next(), line.next());
 				break;
 			}
 			
@@ -53,7 +59,36 @@ public class HW {
 		// ****************************************
 		
 		person = trimArray(person);
-		print(person);
+		
+		if (args[1].equals("print")) {
+			try {				
+				if (args[2].charAt(6) == '-') {
+					printSSNO(person, args[2]);
+				}
+				else if (args[2].equals("student") || args[2].equals("staff") || args[2].equals("professor")) {
+					printClass(person, args[2]);
+				}
+			}
+			catch (Exception e) {
+				try {	
+					if (args[2].equals("student") || args[2].equals("staff") || args[2].equals("professor")) {
+						printClass(person, args[2]);
+					}
+					else {
+						printName(person, args[2]);
+					}
+				}		
+				catch (Exception ee) {					
+					print(person);
+				}
+			}
+		}
+		else if (args[1].equals("sort")) {
+			sort(person, args[2]);
+			print(person);
+		}
+		
+		scanner.close();
 	}
 	
 	private static Person[] trimArray(Person[] arr) {
@@ -69,6 +104,93 @@ public class HW {
 	private static void print(Person[] arr) {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.println(arr[i]);
+		}
+	}
+	
+	private static void printSSNO(Person[] arr, String no) {
+		for (Person p : arr) {
+			if (p.no.equals(no)) {
+				System.out.println(p);
+			}
+		}
+	}
+	
+	private static void printName(Person[] arr, String name) {
+		for (Person p : arr) {
+			if (p.name.equals(name)) {
+				System.out.println(p);
+			}
+		}
+	}
+	
+	private static void printClass(Person[] arr, String className) {	
+		for (Person p : arr) {
+			switch (className) {
+			case "student" :
+				if (p instanceof Student) {
+					System.out.println(p);
+				}
+				
+				break;
+			case "staff" :
+				if (p instanceof Staff) {
+					System.out.println(p);
+				}
+				
+				break;
+			case "professor" :
+				if (p instanceof Professor) {
+					System.out.println(p);
+				}
+				
+				break;
+			}
+		}
+	}
+	
+	private static void sort(Person[] arr, String option) {
+		int n = arr.length;
+		
+		for (int i = 0; i < n - 1; i++) {
+			for (int j = 0; j < n - i - 1; j++) {
+				switch (option) {
+				case "ssno" :
+					if (arr[j].no.compareTo(arr[j + 1].no) > 0) {
+						Person temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+					}
+					
+					break;
+				case "name" :
+					if (arr[j].name.compareTo(arr[j + 1].name) > 0) {
+						Person temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+					}
+					
+					break;
+				case "birthdate" :
+					if (arr[j].date.compareTo(arr[j + 1].date) > 0) {
+						Person temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+					}
+					
+					break;
+				case "address" :
+					if (arr[j].address.compareTo(arr[j + 1].address) > 0) {
+						Person temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+					}
+					
+					break;
+				default :
+					System.out.println("명령어 오류");
+					System.exit(-1);
+				}
+			}
 		}
 	}
 }
@@ -134,9 +256,8 @@ class Student extends Person {
 	/**
 	 * 입학 기간 생성
 	 */
-	private int generateYearEnroll(String date) {
+	private int generateYearEnroll(String date) {	
 		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
 		int y = Integer.parseInt(date.split("-")[0]);
 		
 		int year = y + 19 + random.nextInt(5 + 1);
@@ -150,10 +271,9 @@ class Student extends Person {
 		super(no, name, date, phone, address);
 		
 		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
 		
 		this.yearEnroll = generateYearEnroll(date);
-		this.major = Major.findMajorByID(random.nextInt(Major.values().length + 1)).label();
+		this.major = Major.findMajorByID(random.nextInt(Major.values().length)).label();
 	}
 	
 	@Override
@@ -206,9 +326,8 @@ class Staff extends Person {
 		super(no, name, date, phone, address);
 		
 		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
 		
-		this.major = Major.findMajorByID(random.nextInt(Major.values().length + 1)).label();
+		this.major = Major.findMajorByID(random.nextInt(Major.values().length)).label();
 	}
 	
 	@Override
@@ -266,11 +385,9 @@ class Under extends Student {
 		super(no, name, date, phone, address);
 		
 		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
 		this.Grade = 1 + random.nextInt(4);
 		
-		random.setSeed(System.currentTimeMillis());
-		this.club = Club.findClubByID(random.nextInt(Club.values().length + 1)).label();
+		this.club = Club.findClubByID(random.nextInt(Club.values().length)).label();
 	}
 	
 	public String toString() {
@@ -328,8 +445,7 @@ class Graduate extends Student {
 		super(no, name, date, phone, address);
 		
 		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
-		this.research = Research.findResearchByID(random.nextInt(Research.values().length + 1)).label();
+		this.research = Research.findResearchByID(random.nextInt(Research.values().length)).label();
 	}
 	
 	@Override
@@ -380,8 +496,7 @@ class Assistant extends Staff {
 		super(no, name, date, phone, address);
 		
 		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
-		this.part = Part.findPartByID(random.nextInt(Part.values().length + 1)).label();
+		this.part = Part.findPartByID(random.nextInt(Part.values().length)).label();
 	}
 	
 	@Override
@@ -468,11 +583,13 @@ class Professor extends Staff {
 		
 		Random random = new Random();
 		
+		int building = random.nextInt(Building.values().length);
+		
 		int room = (1 + random.nextInt(6)) * 100 +
 				   (random.nextInt(2 + 1)) * 10 +
 				   (random.nextInt(9 + 1));
 		
-		return String.format("%s %d호", generateLabLocation(), room);
+		return String.format("%s %d호", Building.findBuildingByID(building).label, room);
 	}
 	
 	public Professor() { }
@@ -481,16 +598,14 @@ class Professor extends Staff {
 		super(no, name, date, phone, address);
 		
 		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
-		this.major = Major.findMajorByID(random.nextInt(Major.values().length + 1)).label();
+		this.major = Major.findMajorByID(random.nextInt(Major.values().length)).label();
 		
-		random.setSeed(System.currentTimeMillis());
 		this.locationLab = generateLabLocation();
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("|대학원생|%s|%s|%s|%s|%s|%s|%s|", this.no, this.name, this.date,
+		return String.format("|교수|%s|%s|%s|%s|%s|%s|%s|", this.no, this.name, this.date,
 				this.phone, this.address, this.major, this.locationLab);
 	}
 }
@@ -504,13 +619,12 @@ class MS extends Graduate {
 		super(no, name, date, phone, address);
 		
 		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
 		this.semester = 1 + random.nextInt(4);
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("|대학원생|%s|%s|%s|%s|%s|%d|", this.no, this.name, this.date,
+		return String.format("|석사|%s|%s|%s|%s|%s|%d|", this.no, this.name, this.date,
 				this.phone, this.address, this.semester);
 	}
 }
@@ -524,13 +638,12 @@ class PhD extends Graduate {
 		super(no, name, date, phone, address);
 		
 		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
 		this.years = 1 + random.nextInt(6);
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("|대학원생|%s|%s|%s|%s|%s|%d|", this.no, this.name, this.date,
+		return String.format("|박사|%s|%s|%s|%s|%s|%d|", this.no, this.name, this.date,
 				this.phone, this.address, this.years);
 	}
 }
