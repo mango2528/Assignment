@@ -1,0 +1,18 @@
+public interface Driving {
+
+}
+
+interface PowerSource extends Driving {
+	/*
+	 * 가솔린, 디젤, 전기
+	 */
+	public String generateType();
+}
+
+interface MovingPower extends Driving {
+	public String generate();
+}
+
+interface Feature extends Driving {
+	public String generateType();
+}

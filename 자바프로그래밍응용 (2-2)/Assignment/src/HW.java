@@ -1,0 +1,6 @@
+import java.util.Vector;
+
+public class HW {
+	private Vector<Vehicle> vehicles = new Vector<>();
+}
+

@@ -1,0 +1,19 @@
+public interface Driving {
+
+}
+
+interface PowerSource extends Driving {
+	enum PowerType {
+		gasoline,
+		dissel,
+		electricity;
+	}
+}
+
+interface MovingPower extends Driving {
+	
+}
+
+interface Feature extends Driving {
+	
+}

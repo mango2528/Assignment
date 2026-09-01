@@ -1,0 +1,17 @@
+1788239240808	Delete element
+1788240656781	Delete element
+1788240687126	Move compilation unit
+1788240693321	Delete element
+1788240727426	Delete element
+1788240755251	Move compilation unit
+1788243188790	Rename type 'CarBody'
+1788244368474	Rename field 'name'
+1788244378325	Rename field 'name'
+1788244384155	Rename field 'name'
+1788244389698	Rename field 'name'
+1788245773568	Rename local variable 'powerSources'
+1788246876562	Rename method 'abstractMethod01'
+1788247018341	Rename method 'abstractMethod02'
+1788247212586	Rename method 'generateActivityRange'
+1788247282838	Rename method 'generateProductName'
+1788247296925	Rename method 'generateVehicleName'

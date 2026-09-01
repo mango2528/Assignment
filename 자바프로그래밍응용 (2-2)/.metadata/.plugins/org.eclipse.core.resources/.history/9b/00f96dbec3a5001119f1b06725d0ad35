@@ -1,0 +1,21 @@
+import java.util.random.*;
+
+public class HW {
+	
+}
+
+abstract class Vehicle {
+	
+}
+
+interface PowerSource {
+	
+}
+
+interface MovingPower {
+	
+}
+
+interface Feature {
+	
+}

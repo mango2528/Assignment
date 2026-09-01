@@ -1,0 +1,15 @@
+public interface Driving {
+
+}
+
+interface PowerSource{
+	
+}
+
+interface MovingPower {
+	
+}
+
+interface Feature {
+	
+}

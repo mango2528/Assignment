@@ -1,0 +1,161 @@
+public abstract class Vehicle {
+	String vehicleName;
+	String powerSource;
+	
+	abstract void abstractMethod01();
+	
+	abstract void abstractMethod02();
+	
+	public abstract String toString();
+}
+
+interface Product {
+	void printInfo();
+}
+
+class FeaturesInfo {
+	public String seating;
+	/** 단위는 입방피트(ft^3)임 */
+	public int capacity;
+	/** 단위는 입방피트(ft^3)임 */
+	public int cargoSize;
+	
+	public FeaturesInfo(String seating, int capacity, int cargoSize) {
+		this.seating = seating;
+		this.capacity = capacity;
+		this.cargoSize = cargoSize;
+	}
+}
+
+class Sedan extends Vehicle implements PowerSource, Feature{
+	protected FeaturesInfo featuresInfo;
+	
+	@Override
+	public void abstractMethod01() {
+		
+	}
+	
+	@Override
+	public void abstractMethod02() {
+		
+	}
+	
+	@Override
+	public String toString() {
+		return "";
+	}
+	
+	@Override
+	public String generatePowerSource() {
+		String[] powerSources = {"가솔린", "디젤", "전기"};
+		
+		return powerSources[Random.random(0, powerSources.length - 1)];
+	}
+
+	@Override
+	public String generateSeating() {
+		String[] seatingType = {"버켓", "벤치", "분할 벤치"};
+		
+		return seatingType[Random.random(0, seatingType.length - 1)];
+	}
+
+	@Override
+	public int generateCapacity() {
+		return Random.random(13, 17);
+	}
+
+	@Override
+	public int generateSize() {
+		return Random.random(12, 16);
+	}
+}
+
+class SUV extends Vehicle implements PowerSource, Feature{
+	protected FeaturesInfo featuresInfo;
+	
+	@Override
+	public void abstractMethod01() {
+		
+	}
+	
+	@Override
+	public void abstractMethod02() {
+		
+	}
+	
+	@Override
+	public String toString() {
+		return "";
+	}
+}
+
+class NotchBack extends Sedan implements Product, PowerSource, MovingPower {
+	private String productName;
+	
+	public NotchBack(String name) {
+		this.productName = name;
+	}
+	
+	public void methodNotchBack() {
+		
+	}
+	
+	public void printInfo() {
+		System.out.printf("노치백(%s)", productName);
+	}
+}
+
+class HatchBack extends Sedan implements Product, PowerSource, MovingPower {
+	private String productName;
+	
+	public HatchBack(String name) {
+		this.productName = name;
+	}
+	
+	public void methodHatchBack() {
+		
+	}
+	
+	public void printInfo() {
+		System.out.printf("해치백(%s)", productName);
+	}
+}
+
+class Truck extends SUV implements Product, PowerSource, MovingPower {
+	private String productName;
+	
+	public Truck(String name) {
+		this.productName = name;
+	}
+	
+	public void methodTruck() {
+		
+	}
+	
+	public void printInfo() {
+		System.out.printf("트럭(%s)", productName);
+	}
+}
+
+class CrossOver extends SUV implements Product, PowerSource, MovingPower {
+	private String productName;
+	
+	public CrossOver(String name) {
+		this.productName = name;
+	}
+	
+	public void methodCrossOver() {
+		
+	}
+	
+	public void printInfo() {
+		System.out.printf("크로스오버(%s)", productName);
+	}
+}
+
+class Random {
+	public static int random(int min, int max)  {
+		int range = (max - min) + 1;     
+		return (int)(Math.random() * range) + min;
+	}
+}

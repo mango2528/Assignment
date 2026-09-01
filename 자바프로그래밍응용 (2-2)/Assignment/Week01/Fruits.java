@@ -1,0 +1,33 @@
+public abstract class Fruits {
+	private String name;
+	private int count;
+	
+	public Fruits(String name, int count) {
+		this.name = name;
+		this.count = count;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getCount() {
+		return count;
+	}
+}
+
+class Apple extends Fruits {
+	public Apple(String name, int count) {
+		super(name, count);
+	}
+	
+	@Override
+	public String getName() {
+		return String.format("사과(%s)", name);
+	}
+	
+	@Override
+	public String getCount() {
+		return String.format("%d개", count);
+	}
+}

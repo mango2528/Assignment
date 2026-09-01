@@ -1,0 +1,45 @@
+import java.util.random.*;
+
+public class HW {
+	
+}
+
+abstract class Vehicle {
+	
+}
+
+class Sedan {
+	
+}
+
+class SUV {
+	
+}
+
+class NotchBack extends Sedan {
+	
+}
+
+class HatchBack extends Sedan {
+	
+}
+
+class Truck extends SUV {
+	
+}
+
+class CrossOver extends SUV {
+	
+}
+
+interface PowerSource {
+	
+}
+
+interface MovingPower {
+	
+}
+
+interface Feature {
+	
+}

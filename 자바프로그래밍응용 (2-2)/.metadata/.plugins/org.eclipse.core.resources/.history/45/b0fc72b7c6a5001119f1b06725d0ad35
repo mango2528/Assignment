@@ -1,0 +1,9 @@
+public class Fruits {
+	String name;
+	int count;
+	
+	public Fruits(String name, int count) {
+		this.name = name;
+		this.count = count;
+	}
+}

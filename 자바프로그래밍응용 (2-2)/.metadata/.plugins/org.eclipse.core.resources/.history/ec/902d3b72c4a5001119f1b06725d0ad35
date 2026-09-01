@@ -1,0 +1,50 @@
+public class HW {
+	
+}
+
+abstract class Vehicle {
+	
+}
+
+class Sedan {
+	
+}
+
+class SUV {
+	
+}
+
+class NotchBack extends Sedan {
+	
+}
+
+class HatchBack extends Sedan {
+	
+}
+
+class Truck extends SUV {
+	
+}
+
+class CrossOver extends SUV {
+	
+}
+
+class Rand {
+	public static int r(int min, int max)  {
+		int range = (max - min) + 1;     
+		return (int)(Math.random() * range) + min;
+	}
+}
+
+interface PowerSource {
+	
+}
+
+interface MovingPower {
+	
+}
+
+interface Feature {
+	
+}
